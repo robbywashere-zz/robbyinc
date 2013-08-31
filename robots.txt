@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://robbywashere.github.io//github/sitemap.xml 

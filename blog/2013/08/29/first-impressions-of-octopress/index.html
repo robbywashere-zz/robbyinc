@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>First impressions of octopress - All Things Robby</title>
+  <meta name="author" content="Robby">
+
+  
+  <meta name="description" content="Robby at Robbyinc is a chief web application chef at Robbyinc specializing in front-end spice and back-end sugar">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://robbywashere.github.io//github/blog/2013/08/29/first-impressions-of-octopress/">
+  <link href="/github/favicon.png" rel="icon">
+  <link href="/github/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/github/javascripts/modernizr-2.0.js"></script>
+  <script src="/github/javascripts/ender.js"></script>
+  <script src="/github/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/github/atom.xml" rel="alternate" title="All Things Robby" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/github/">All Things Robby</a>
+  </div>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/github/">All Things Robby</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Musings of a hack</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:robbywashere.github.io//github" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">First Impressions of Octopress</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-29T04:08:00-04:00" pubdate data-updated="true">Aug 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<p>Wouldn&rsquo;t it be nice if octopress would open vim after running:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s2">&quot;blog title&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Well thats great because you can!</em></p>
+
+<!-- more -->
+
+
+<p>Just add this to your rake file&hellip;.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;comments: true&quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;categories: &quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;---&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="nb">exec</span><span class="p">(</span><span class="s2">&quot;vim </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1">#This is the line to add!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Cool! Great&hellip; Party!</em></p>
+
+<p>Also, thanks to <a href="https://gist.github.com/imathis/2219214">this Gist</a>, editing posts is rather trivial.</p>
+
+<p>Add this to your Rakefile,</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Edit a post (defaults to most recent)&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:edit_post</span><span class="p">,</span> <span class="ss">:title</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">args</span><span class="o">.</span><span class="n">with_defaults</span><span class="p">(</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">posts</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">post</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="p">?</span> <span class="n">post</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">keep_if</span> <span class="p">{</span><span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="n">post</span> <span class="o">=~</span> <span class="sr">/</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="sr">/i</span><span class="p">}</span><span class="o">.</span><span class="n">last</span> <span class="p">:</span> <span class="n">posts</span><span class="o">.</span><span class="n">last</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">post</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Opening </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="nb">exec</span><span class="p">(</span><span class="s2">&quot;vim </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;No posts were found with </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> in the title.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Replace vim with your favorite editor</em></p>
+
+<p>Then to edit your latest post try:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake edit_post
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To search and edit a blog post with a word or title try:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake edit_post
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+
+</article>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

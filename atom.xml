@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[All Things Robby]]></title>
+  <link href="http://robbywashere.github.io//github/atom.xml" rel="self"/>
+  <link href="http://robbywashere.github.io//github/"/>
+  <updated>2013-08-31T05:23:21-04:00</updated>
+  <id>http://robbywashere.github.io//github/</id>
+  <author>
+    <name><![CDATA[Robby]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Set Up SSH Keys]]></title>
+    <link href="http://robbywashere.github.io//github/blog/2013/08/29/ssh-login-with-private-key/"/>
+    <updated>2013-08-29T23:37:00-04:00</updated>
+    <id>http://robbywashere.github.io//github/blog/2013/08/29/ssh-login-with-private-key</id>
+    <content type="html"><![CDATA[<blockquote><p>&ldquo;Sometimes I have the worst memory. I always forget these things&hellip; like how to set up ssh keys.&rdquo; &mdash;Woody Allen</p></blockquote>
+
+<hr />
+
+<br />
+
+
+<p>SSH keys provide a more secure way of logging into any Secure Shell, like on a shared or private server. <em>Without the need for a passphrase</em></p>
+
+<p>I always seem to forget my passphrase. Sadly, I also always forget how to setup ssh keys!</p>
+
+<p><em>So now I am writing up how to, just in case.</em></p>
+
+<!-- more -->
+
+
+<p>Assume, <em>client</em> is your local computer and <em>server</em> is your shared host or vps, etc&hellip;</p>
+
+<h2>First &ndash; Create the RSA Pair</h2>
+
+<p>On the client type:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh-keygen -t rsa
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Second &ndash; Store the Keys and Passphrase</h2>
+
+<p>You will be prompted to name your file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Enter file in which to save the key (/demo/.ssh/id_rsa):</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Meh</em> hit enter&hellip;.</p>
+
+<p><strong><em> Then you will be prompted to enter a passphrase  </em></strong></p>
+
+<p><em>Im too lazy to be paranoid, so just hit enter</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Enter passphrase (empty for no passphrase):</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The public key is now located in /demo/.ssh/id_rsa.pub</p>
+
+<p>The private key is located in /demo/.ssh/id_rsa</p>
+
+<h2>Third &ndash; Copy the Public Key</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat .ssh/id_rsa.pub | ssh user@123.45.56.78 "cat >> ~/.ssh/authorized_keys"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then when you you run ssh, you will see something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The authenticity of host 'exmaple.com (192.168.0.1)' can't be established.
+</span><span class='line'>
+</span><span class='line'>RSA key fingerprint is 9x:8c:0b:f2:2f:14:4b:5c:5b:ex:ax:46:46:74:7c:40.
+</span><span class='line'>Are you sure you want to continue connecting (yes/no)?</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong> Enter yes, as this is normal when first establishing the connection at first </strong></p>
+
+<h2>Optional Fourth &ndash; Disable the Password for Root Login</h2>
+
+<p>Once you have copied your SSH keys unto your server and <strong><em> ensured that you can log in with the SSH keys alone </em></strong> you can go ahead and restrict the root login to only be permitted via SSH keys.</p>
+
+<p>In order to do this, open up the SSH config file:
+sudo vim /etc/ssh/sshd_config</p>
+
+<p>Within that file, find the line that includes PermitRootLogin and modify it to ensure that users can only connect with their SSH key:
+<code>PermitRootLogin without-password</code></p>
+
+<p>Put the changes into effect:
+<code>reload ssh</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[vim and markdown]]></title>
+    <link href="http://robbywashere.github.io//github/blog/2013/08/29/vim-and-markdown/"/>
+    <updated>2013-08-29T22:57:00-04:00</updated>
+    <id>http://robbywashere.github.io//github/blog/2013/08/29/vim-and-markdown</id>
+    <content type="html"><![CDATA[<p>The syntax highlighting for markdown in vim can be a real pain in the butt sometimes. The problem is especially with how it highlights text with underscores, mistaking your intentions for highlights in codeblocks, for instance. Thankfully, there is a better more updated markdown syntax highlighter. If you have pathogen package manager for vim simply:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/.vim/bundle
+</span><span class='line'><span class="nv">$ </span>git clone https://github.com/plasticboy/vim-markdown.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you use vim and you don&rsquo;t have pathogen installed then you should <a href="https://github.com/tpope/vim-pathogen">git it!</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First impressions of octopress]]></title>
+    <link href="http://robbywashere.github.io//github/blog/2013/08/29/first-impressions-of-octopress/"/>
+    <updated>2013-08-29T04:08:00-04:00</updated>
+    <id>http://robbywashere.github.io//github/blog/2013/08/29/first-impressions-of-octopress</id>
+    <content type="html"><![CDATA[<p>Wouldn&rsquo;t it be nice if octopress would open vim after running:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s2">&quot;blog title&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Well thats great because you can!</em></p>
+
+<!-- more -->
+
+
+<p>Just add this to your rake file&hellip;.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;comments: true&quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;categories: &quot;</span>
+</span><span class='line'>    <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;---&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="nb">exec</span><span class="p">(</span><span class="s2">&quot;vim </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1">#This is the line to add!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Cool! Great&hellip; Party!</em></p>
+
+<p>Also, thanks to <a href="https://gist.github.com/imathis/2219214">this Gist</a>, editing posts is rather trivial.</p>
+
+<p>Add this to your Rakefile,</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Edit a post (defaults to most recent)&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:edit_post</span><span class="p">,</span> <span class="ss">:title</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">args</span><span class="o">.</span><span class="n">with_defaults</span><span class="p">(</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">posts</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">post</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="p">?</span> <span class="n">post</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">keep_if</span> <span class="p">{</span><span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="n">post</span> <span class="o">=~</span> <span class="sr">/</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="sr">/i</span><span class="p">}</span><span class="o">.</span><span class="n">last</span> <span class="p">:</span> <span class="n">posts</span><span class="o">.</span><span class="n">last</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">post</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Opening </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">...&quot;</span>
+</span><span class='line'>    <span class="nb">exec</span><span class="p">(</span><span class="s2">&quot;vim </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;No posts were found with </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> in the title.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Replace vim with your favorite editor</em></p>
+
+<p>Then to edit your latest post try:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake edit_post
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To search and edit a blog post with a word or title try:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake edit_post
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

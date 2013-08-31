@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | All Things Robby]]></title>
+  <link href="http://robbywashere.github.io//github/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://robbywashere.github.io//github/"/>
+  <updated>2013-08-31T05:23:21-04:00</updated>
+  <id>http://robbywashere.github.io//github/</id>
+  <author>
+    <name><![CDATA[Robby]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First impressions of octopress]]></title>
+    <link href="http://robbywashere.github.io//github/blog/2013/08/29/first-impressions-of-octopress/"/>
+    <updated>2013-08-29T04:08:00-04:00</updated>
+    <id>http://robbywashere.github.io//github/blog/2013/08/29/first-impressions-of-octopress</id>
+    <content type="html"><![CDATA[<p>Wouldn&rsquo;t it be nice if octopress would open vim after running:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="nv">$ </span>rake new_post<span class="o">[</span>&amp;ldquo;blog title&amp;rdquo;<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><em>Well thats great because you can!</em></p>
+
+<!-- more -->
+
+
+<p>Just add this to your rake file&hellip;.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;post.puts &quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M&#39;</span><span class="p">)</span><span class="si">}</span><span class="sr">&quot;</span>
+</span><span class='line'><span class="sr">post.puts &quot;comments: true&quot;</span>
+</span><span class='line'><span class="sr">post.puts &quot;categories: &quot;</span>
+</span><span class='line'><span class="sr">post.puts &quot;---&quot;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span><span class='line'><span class="sr">  exec(&amp;ldquo;vim </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="sr">&amp;rdquo;) #This is the line to add!</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><em>Cool! Great&hellip; Party!</em></p>
+
+<p>Also, thanks to <a href="https://gist.github.com/imathis/2219214">this Gist</a>, editing posts is rather trivial.</p>
+
+<p>Add this to your Rakefile,</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;desc &amp;ldquo;Edit a post (defaults to most recent)&amp;rdquo;</span>
+</span><span class='line'><span class="sr">task :edit_post, :title do |t, args|</span>
+</span><span class='line'><span class="sr">  args.with_defaults(:title =&gt; false)</span>
+</span><span class='line'><span class="sr">  posts = Dir.glob(&amp;ldquo;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="sr">/</span><span class="c1">#{posts_dir}/&lt;em&gt;.&lt;/em&gt;&amp;rdquo;)</span>
+</span><span class='line'>  <span class="n">post</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="p">?</span> <span class="n">post</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">keep_if</span> <span class="p">{</span><span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="n">post</span> <span class="o">=~</span> <span class="sr">/</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="sr">/i</span><span class="p">}</span><span class="o">.</span><span class="n">last</span> <span class="p">:</span> <span class="n">posts</span><span class="o">.</span><span class="n">last</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">post</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;puts &quot;Opening </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="sr">...&quot;</span>
+</span><span class='line'><span class="sr">exec(&quot;vim </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="sr">&quot;)</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  else&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nb">puts</span> <span class="s2">&quot;No posts were found with </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> in the title.&quot;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><em>Replace vim with your favorite editor</em></p>
+
+<p>Then to edit your latest post try:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>rake edit_post&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To search and edit a blog post with a word or title try:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake edit_post
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
